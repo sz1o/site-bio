@@ -16,6 +16,11 @@
 
 body {
     background-color: var(--bg-color);
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: 0 0, 0 0;
     color: var(--text-color);
     font-family: 'Space Mono', monospace;
     min-height: 100vh;
@@ -215,6 +220,185 @@ body {
     to { transform: rotate(360deg); }
 }
 
+/* Tooltip Wrapper */
+.btn-tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    font-weight: 700;
+    z-index: 1000;
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--text-color);
+}
+
+.btn-tooltip-wrapper:hover .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.disabled-btn {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.disabled-btn:hover {
+    color: var(--text-color);
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+.disabled-btn::before {
+    display: none;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+.modal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    position: relative;
+    background-color: var(--bg-color);
+    border: 2px solid var(--text-color);
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    z-index: 2001;
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 2.5rem;
+    cursor: pointer;
+    font-weight: 300;
+    line-height: 1;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    transform: rotate(90deg);
+    opacity: 0.7;
+}
+
+.modal h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: 0.02em;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.cashapp-info {
+    border: 1px solid var(--text-color);
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.cashapp-info:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    transform: translateX(5px);
+}
+
+.info-label {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.info-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Space Mono', monospace;
+}
+
+.info-link {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    word-break: break-all;
+    transition: opacity 0.3s ease;
+    display: block;
+}
+
+.info-link:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -401,6 +585,31 @@ body {
     .btn {
         width: 100%;
         justify-content: center;
+    }
+    
+    .btn-tooltip-wrapper {
+        width: 100%;
+    }
+    
+    .btn-tooltip-wrapper .btn {
+        width: 100%;
+    }
+    
+    .modal-content {
+        padding: 30px 20px;
+        width: 95%;
+    }
+    
+    .modal h2 {
+        font-size: 1.5rem;
+    }
+    
+    .info-value {
+        font-size: 1.2rem;
+    }
+    
+    .info-link {
+        font-size: 0.9rem;
     }
     
     .games-grid {

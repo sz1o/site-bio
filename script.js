@@ -96,3 +96,37 @@ if (profilePic) {
         profilePic.style.transform = `translate(${x}px, ${y}px)`;
     });
 }
+
+// Cashapp Modal functionality
+const cashappBtn = document.getElementById('cashappBtn');
+const cashappModal = document.getElementById('cashappModal');
+const closeModal = document.getElementById('closeModal');
+
+if (cashappBtn && cashappModal) {
+    cashappBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        cashappModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    closeModal.addEventListener('click', () => {
+        cashappModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // Close modal when clicking outside
+    cashappModal.addEventListener('click', (e) => {
+        if (e.target === cashappModal) {
+            cashappModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && cashappModal.classList.contains('active')) {
+            cashappModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}

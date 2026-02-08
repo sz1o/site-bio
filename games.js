@@ -18,7 +18,27 @@ const gameFiles = [
     { file: "Sonic_EXE.html", title: "Sonic EXE" },
     { file: "Sonic-Mania.html", title: "Sonic Mania" },
     { file: "Rooftop-Snipers.html", title: "Rooftop Snipers" },
-    { file: "Gorilla-Tag.html", title: "Gorilla Tag" }
+    { file: "Gorilla-Tag.html", title: "Gorilla Tag" },
+    { file: "Bank-Robbery-2.html", title: "Bank Robbery 2" },
+    { file: "Basket-Bros.html", title: "Basket Bros" },
+    { file: "Baldi_s-Basics-Plus.html", title: "Baldis Basics Plus" },
+    { file: "Granny.html", title: "Granny" },
+    { file: "Gunspin.html", title: "Gunspin" },
+    { file: "OvO.html", title: "OvO" },
+    { file: "Raldi_s-Crackhouse.html", title: "Raldis Crackhouse" },
+    { file: "Undertale-Yellow.html", title: "Undertale Yellow" },
+    { file: "Vex-6.html", title: "Vex 6" },
+    { file: "Web-Fishing.html", title: "Web Fishing" },
+    { file: "Retro-Bowl.html", title: "Retro Bowl" },
+    { file: "Geometry-Dash-Lite.html", title: "Geometry Dash Lite" },
+    { file: "Friday-Night-Funkin.html", title: "Friday Night Funkin" },
+    { file: "Five-Nights-at-Freddy_s.html", title: "Five Nights at Freddys" },
+    { file: "Slope.html", title: "Slope" },
+    { file: "Duck-Life.html", title: "Duck Life" },
+    { file: "Basketball-Stars.html", title: "Basketball Stars" },
+    { file: "Bad-Time-Simulator.html", title: "Bad Time Simulator" },
+    { file: "Minecraft-1_12_2.html", title: "Minecraft 1.12.2" },
+    { file: "Terraria.html", title: "Terraria" }
 ];
 
 // Function to create and add game cards
