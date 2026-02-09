@@ -21,7 +21,7 @@ const gameFiles = [
     { file: "Gorilla-Tag.html", title: "Gorilla Tag" },
     { file: "Bank-Robbery-2.html", title: "Bank Robbery 2" },
     { file: "Basket-Bros.html", title: "Basket Bros" },
-    { file: "Baldi_s-Basics-Plus.html", title: "Baldis Basics Plus" },
+    { file: "Baldis-Basics-Plus.html", title: "Baldis Basics Plus" },
     { file: "Granny.html", title: "Granny" },
 ];
 
