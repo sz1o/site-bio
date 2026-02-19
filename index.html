@@ -9,6 +9,12 @@
 </head>
 <body>
     <div class="container">
+        <button class="settings-btn" id="settingsBtn">
+            <svg class="gear-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 15.5A3.5 3.5 0 0 1 8.5 12 3.5 3.5 0 0 1 12 8.5a3.5 3.5 0 0 1 3.5 3.5 3.5 3.5 0 0 1-3.5 3.5m7.43-2.53c.04-.32.07-.64.07-.97 0-.33-.03-.66-.07-1l2.11-1.63c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.39-1.06-.73-1.69-.98l-.37-2.65A.506.506 0 0 0 14 2h-4c-.25 0-.46.18-.5.42l-.37 2.65c-.63.25-1.17.59-1.69.98l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64L4.57 11c-.04.34-.07.67-.07 1 0 .33.03.65.07.97l-2.11 1.66c-.19.15-.25.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1.01c.52.4 1.06.74 1.69.99l.37 2.65c.04.24.25.42.5.42h4c.25 0 .46-.18.5-.42l.37-2.65c.63-.26 1.17-.59 1.69-.99l2.49 1.01c.22.08.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.66z"/>
+            </svg>
+        </button>
+        
         <div class="profile-section">
             <img src="profile.jpg" alt="Profile Picture" class="profile-pic" id="profilePic">
         </div>
@@ -67,6 +73,45 @@
                 <div class="cashapp-info">
                     <p class="info-label">Link</p>
                     <a href="https://cash.app/$cuddlykittenz" target="_blank" class="info-link">https://cash.app/$cuddlykittenz</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content settings-content">
+            <button class="modal-close" id="closeSettings">&times;</button>
+            <h2>⚙️ Settings</h2>
+            <div class="modal-body">
+                <div class="settings-section">
+                    <h3>Theme</h3>
+                    <div class="theme-selector">
+                        <button class="theme-btn active" data-theme="default">
+                            <span class="theme-preview" style="background: linear-gradient(135deg, #000 50%, #fff 50%);"></span>
+                            Classic
+                        </button>
+                        <button class="theme-btn" data-theme="neon">
+                            <span class="theme-preview" style="background: linear-gradient(135deg, #0a0a0a 50%, #00ff41 50%);"></span>
+                            Neon Green
+                        </button>
+                        <button class="theme-btn" data-theme="cyberpunk">
+                            <span class="theme-preview" style="background: linear-gradient(135deg, #0a0014 50%, #ff00ff 50%);"></span>
+                            Cyberpunk
+                        </button>
+                        <button class="theme-btn" data-theme="retro">
+                            <span class="theme-preview" style="background: linear-gradient(135deg, #1a1a2e 50%, #ff6b6b 50%);"></span>
+                            Retro
+                        </button>
+                        <button class="theme-btn" data-theme="ocean">
+                            <span class="theme-preview" style="background: linear-gradient(135deg, #001233 50%, #00d4ff 50%);"></span>
+                            Ocean
+                        </button>
+                        <button class="theme-btn" data-theme="sunset">
+                            <span class="theme-preview" style="background: linear-gradient(135deg, #1a0a00 50%, #ff6b35 50%);"></span>
+                            Sunset
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

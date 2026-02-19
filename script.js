@@ -130,3 +130,48 @@ if (cashappBtn && cashappModal) {
         }
     });
 }
+
+// Settings Modal functionality
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsModal = document.getElementById('settingsModal');
+const closeSettings = document.getElementById('closeSettings');
+
+if (settingsBtn && settingsModal) {
+    settingsBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        settingsModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    closeSettings.addEventListener('click', () => {
+        settingsModal.classList.remove('active');
+        document.body.style.overflow = '';
+    });
+    
+    // Close modal when clicking outside
+    settingsModal.addEventListener('click', (e) => {
+        if (e.target === settingsModal) {
+            settingsModal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+// Theme Switching
+const savedTheme = localStorage.getItem('siteTheme') || 'default';
+document.body.setAttribute('data-theme', savedTheme);
+
+document.querySelectorAll('.theme-btn').forEach(btn => {
+    if (btn.dataset.theme === savedTheme) {
+        btn.classList.add('active');
+    }
+    
+    btn.addEventListener('click', () => {
+        const theme = btn.dataset.theme;
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('siteTheme', theme);
+        
+        document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    });
+});

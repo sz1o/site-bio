@@ -45,6 +45,78 @@ const gameFiles = [
 let favorites = JSON.parse(localStorage.getItem('gameFavorites')) || [];
 let showOnlyFavorites = false;
 
+// Game history management
+let gameHistory = JSON.parse(localStorage.getItem('gameHistory')) || [];
+
+function addToHistory(gameTitle, gameFile) {
+    const historyItem = {
+        title: gameTitle,
+        file: gameFile,
+        timestamp: new Date().toISOString()
+    };
+    
+    // Remove if already exists
+    gameHistory = gameHistory.filter(item => item.title !== gameTitle);
+    
+    // Add to beginning
+    gameHistory.unshift(historyItem);
+    
+    // Keep only last 10
+    gameHistory = gameHistory.slice(0, 10);
+    
+    localStorage.setItem('gameHistory', JSON.stringify(gameHistory));
+    updateHistoryDisplay();
+}
+
+function updateHistoryDisplay() {
+    const historyList = document.getElementById('historyList');
+    
+    if (gameHistory.length === 0) {
+        historyList.innerHTML = '<p class="history-empty">No games played yet!</p>';
+        return;
+    }
+    
+    historyList.innerHTML = gameHistory.map(item => {
+        const date = new Date(item.timestamp);
+        const timeAgo = getTimeAgo(date);
+        
+        return `
+            <div class="history-item" onclick="window.location.href='games/${item.file}'">
+                <div>
+                    <div class="history-item-title">${item.title}</div>
+                    <div class="history-item-time">${timeAgo}</div>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function getTimeAgo(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    
+    if (seconds < 60) return 'Just now';
+    if (seconds < 3600) return `${Math.floor(seconds / 60)}m ago`;
+    if (seconds < 86400) return `${Math.floor(seconds / 3600)}h ago`;
+    return `${Math.floor(seconds / 86400)}d ago`;
+}
+
+// Online counter (simulated)
+function updateOnlineCount() {
+    const baseCount = 42; // Base number
+    const variance = Math.floor(Math.random() * 15); // Random 0-14
+    const count = baseCount + variance;
+    
+    const onlineCountEl = document.getElementById('onlineCount');
+    if (onlineCountEl) {
+        onlineCountEl.textContent = count;
+    }
+}
+
+// Update online count every 5 seconds
+setInterval(updateOnlineCount, 5000);
+updateOnlineCount(); // Initial call
+
+
 function toggleFavorite(gameTitle, event) {
     event.stopPropagation();
     
@@ -156,6 +228,7 @@ function loadGames() {
         gameCard.insertBefore(favoriteBtn, gameCard.firstChild);
         
         gameCard.onclick = () => {
+            addToHistory(game.title, game.file);
             window.location.href = `games/${game.file}`;
         };
         
@@ -168,6 +241,7 @@ function loadGames() {
 // Event listeners
 window.addEventListener('load', () => {
     loadGames();
+    updateHistoryDisplay();
     
     // Search bar
     const searchBar = document.getElementById('searchBar');
@@ -188,6 +262,63 @@ window.addEventListener('load', () => {
     // Random game card
     const randomCard = document.getElementById('randomGameCard');
     randomCard.addEventListener('click', openRandomGame);
+    
+    // History toggle
+    const historyToggle = document.getElementById('historyToggle');
+    const gameHistoryPanel = document.getElementById('gameHistory');
+    const historyClose = document.getElementById('historyClose');
+    
+    historyToggle.addEventListener('click', () => {
+        gameHistoryPanel.classList.toggle('active');
+    });
+    
+    historyClose.addEventListener('click', () => {
+        gameHistoryPanel.classList.remove('active');
+    });
+    
+    // Settings modal
+    const settingsBtnGames = document.getElementById('settingsBtnGames');
+    const settingsModal = document.getElementById('settingsModal');
+    const closeSettings = document.getElementById('closeSettings');
+    
+    if (settingsBtnGames && settingsModal) {
+        settingsBtnGames.addEventListener('click', (e) => {
+            e.preventDefault();
+            settingsModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeSettings.addEventListener('click', () => {
+            settingsModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        settingsModal.addEventListener('click', (e) => {
+            if (e.target === settingsModal) {
+                settingsModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+    
+    // Theme switching
+    const savedTheme = localStorage.getItem('siteTheme') || 'default';
+    document.body.setAttribute('data-theme', savedTheme);
+    
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+        if (btn.dataset.theme === savedTheme) {
+            btn.classList.add('active');
+        }
+        
+        btn.addEventListener('click', () => {
+            const theme = btn.dataset.theme;
+            document.body.setAttribute('data-theme', theme);
+            localStorage.setItem('siteTheme', theme);
+            
+            document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        });
+    });
 });
 
 // Add smooth scroll behavior
